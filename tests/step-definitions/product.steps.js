@@ -2,34 +2,35 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const ProductPage = require('../pages/ProductPage');
 
-Given('I navigate to the homepage', { timeout: 90000 }, async function() {
-  // Listen for the products API response
-  const productsPromise = this.page.waitForResponse(
+Given('I navigate to the homepage', { timeout: 120000 }, async function() {
+  await this.page.goto('https://practicesoftwaretesting.com', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  
+  // Wait for products API
+  const response = await this.page.waitForResponse(
     response => response.url().includes('/products') && response.status() === 200,
     { timeout: 30000 }
   );
   
-  await this.page.goto('https://practicesoftwaretesting.com', { waitUntil: 'domcontentloaded', timeout: 60000 });
-  
-  // Wait for products API to complete
-  const response = await productsPromise;
   const responseBody = await response.json();
   console.log('API Response:', JSON.stringify(responseBody).substring(0, 200));
   
-  // Wait for the page to be fully loaded and interactive
+  // Wait for network idle
   await this.page.waitForLoadState('networkidle', { timeout: 30000 });
   
-  // Wait longer for Angular/React to render (CI is slower)
-  await this.page.waitForTimeout(15000);
-  
-  // Debug: Check if product is rendered
-  const bodyText = await this.page.locator('body').textContent();
-  console.log('Page text includes Combination:', bodyText.includes('Combination'));
-  
-  if (!bodyText.includes('Combination')) {
-    await this.page.screenshot({ path: 'debug-homepage.png', fullPage: true });
-    console.log('Product not rendered, screenshot saved');
+  // Poll for product to appear (up to 30 seconds)
+  let attempts = 0;
+  while (attempts < 30) {
+    await this.page.waitForTimeout(1000);
+    const bodyText = await this.page.locator('body').textContent();
+    if (bodyText.includes('Combination')) {
+      console.log(`Product found after ${attempts + 1} seconds`);
+      return;
+    }
+    attempts++;
   }
+  
+  await this.page.screenshot({ path: 'debug-homepage.png', fullPage: true });
+  throw new Error('Product not rendered after 30 seconds');
 });
 
 When('I click on {string} product', { timeout: 90000 }, async function(productName) {
