@@ -1,0 +1,63 @@
+{
+  "current_page": 1,
+  "data": [
+    {
+      "id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+      "name": "Combination Pliers",
+      "description": "Versatile combination pliers designed for gripping, bending, and cutting wire with ease.",
+      "price": 14.15,
+      "is_location_offer": false,
+      "is_rental": false,
+      "product_image_id": "01HHJC7RERZJY4BEYQ87PC2Q4B",
+      "product_image": {
+        "id": "01HHJC7RERZJY4BEYQ87PC2Q4B",
+        "by_name": "Helinton Fantin",
+        "by_url": "https://unsplash.com/@fantin",
+        "source_name": "Unsplash",
+        "source_url": "https://unsplash.com",
+        "file_name": "pliers01.jpeg",
+        "title": "Combination Pliers"
+      },
+      "category_id": "01HHJC7RERZJY4BEYQ87PC2Q2Z",
+      "category": {
+        "id": "01HHJC7RERZJY4BEYQ87PC2Q2Z",
+        "parent_id": "01HHJC7RERZJY4BEYQ87PC2Q3A",
+        "name": "Pliers",
+        "slug": "pliers"
+      },
+      "brand_id": "01HHJC7RERZJY4BEYQ87PC2Q1Y",
+      "brand": {
+        "id": "01HHJC7RERZJY4BEYQ87PC2Q1Y",
+        "name": "ForgeFlex Tools",
+        "slug": "forgeflex-tools"
+      }
+    }
+  ],
+  "first_page_url": "/?page=1",
+  "from": 1,
+  "last_page": 1,
+  "last_page_url": "/?page=1",
+  "links": [
+    {
+      "url": null,
+      "label": "&laquo; Previous",
+      "active": false
+    },
+    {
+      "url": "/?page=1",
+      "label": "1",
+      "active": true
+    },
+    {
+      "url": null,
+      "label": "Next &raquo;",
+      "active": false
+    }
+  ],
+  "next_page_url": null,
+  "path": "/",
+  "per_page": 9,
+  "prev_page_url": null,
+  "to": 1,
+  "total": 1
+}

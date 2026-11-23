@@ -1,0 +1,11 @@
+info:
+  name: Brand
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit
+
+docs:
+  content: Brand
+  type: text/markdown

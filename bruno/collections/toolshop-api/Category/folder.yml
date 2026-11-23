@@ -1,0 +1,11 @@
+info:
+  name: Category
+  type: folder
+  seq: 3
+
+request:
+  auth: inherit
+
+docs:
+  content: Category
+  type: text/markdown

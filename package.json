@@ -1,0 +1,24 @@
+{
+  "name": "bruno-stub-pipeline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "mock:start": "node mock-server.js",
+    "test": "cucumber-js tests/features/**/*.feature --require tests/step-definitions --require tests/support",
+    "test:mock": "node mock-server.js & sleep 2 && npm test",
+    "report": "node generate-report.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.9.0",
+    "@playwright/test": "^1.65.1",
+    "@usebruno/cli": "^4.3.0",
+    "chai": "^4.5.0",
+    "cucumber-html-reporter": "^7.2.0",
+    "dotenv": "^18.0.10"
+  }
+}

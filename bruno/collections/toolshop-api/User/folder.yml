@@ -1,0 +1,11 @@
+info:
+  name: User
+  type: folder
+  seq: 7
+
+request:
+  auth: inherit
+
+docs:
+  content: User
+  type: text/markdown

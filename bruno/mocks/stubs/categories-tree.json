@@ -1,0 +1,15 @@
+[
+  {
+    "id": "01HHJC7RERZJY4BEYQ87PC2Q3A",
+    "name": "Hand Tools",
+    "slug": "hand-tools",
+    "children": [
+      {
+        "id": "01HHJC7RERZJY4BEYQ87PC2Q2Z",
+        "parent_id": "01HHJC7RERZJY4BEYQ87PC2Q3A",
+        "name": "Pliers",
+        "slug": "pliers"
+      }
+    ]
+  }
+]

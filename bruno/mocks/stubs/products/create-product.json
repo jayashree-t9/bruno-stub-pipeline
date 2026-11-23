@@ -1,0 +1,32 @@
+{
+  "id": "01JFG8Q5XKZJY4BEYQ87PC2Q1Y",
+  "name": "new brand",
+  "description": "Lorum ipsum",
+  "price": 9.99,
+  "is_location_offer": 1,
+  "is_rental": 0,
+  "in_stock": 0,
+  "co2_rating": "A",
+  "is_eco_friendly": true,
+  "brand": {
+    "id": "",
+    "name": "new brand",
+    "slug": "new-brand"
+  },
+  "category": {
+    "id": "",
+    "parent_id": "",
+    "name": "new category",
+    "slug": "new-category",
+    "sub_categories": []
+  },
+  "product_image": {
+    "by_name": "",
+    "by_url": "",
+    "source_name": "",
+    "source_url": "",
+    "file_name": "",
+    "title": "",
+    "id": ""
+  }
+}

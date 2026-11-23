@@ -1,0 +1,4 @@
+name: Deployed environment
+variables:
+  - name: baseUrl
+    value: https://api.practicesoftwaretesting.com

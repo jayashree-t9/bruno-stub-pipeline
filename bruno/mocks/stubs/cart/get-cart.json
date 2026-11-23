@@ -1,0 +1,26 @@
+{
+  "id": "cart-123",
+  "additional_discount_percentage": null,
+  "lat": null,
+  "lng": null,
+  "cart_items": [
+    {
+      "id": "cart-item-001",
+      "quantity": 1,
+      "discount_percentage": null,
+      "cart_id": "cart-123",
+      "product_id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+      "product": {
+        "id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+        "name": "Combination Pliers",
+        "description": "Versatile combination pliers designed for gripping, bending, and cutting wire with ease.",
+        "price": 14.15,
+        "is_location_offer": false,
+        "is_rental": false,
+        "co2_rating": "D",
+        "in_stock": true,
+        "is_eco_friendly": false
+      }
+    }
+  ]
+}

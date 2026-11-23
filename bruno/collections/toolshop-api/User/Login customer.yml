@@ -1,0 +1,53 @@
+info:
+  name: Login customer
+  type: http
+  seq: 3
+  tags:
+    - User
+
+http:
+  method: POST
+  url: "{{baseUrl}}/users/login"
+  body:
+    type: json
+    data: |-
+      {
+        "email": "customer@practicesoftwaretesting.com",
+        "password": "welcome01"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: A token
+    request:
+      url: "{{baseUrl}}/users/login"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "email": "customer@practicesoftwaretesting.com",
+            "password": "welcome01"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "access_token": "super-secret-token",
+            "token_type": "Bearer",
+            "expires_in": 120
+          }

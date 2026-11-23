@@ -1,0 +1,98 @@
+meta {
+  name: Mock Server
+  type: http
+}
+
+mock {
+  enabled: true
+}
+
+http:get {
+  req {
+    url: /products/:id
+  }
+  res {
+    status: 200
+    body: file(./stubs/products/get-product.json)
+  }
+}
+
+http:post {
+  req {
+    url: /products
+  }
+  res {
+    status: 201
+    body: file(./stubs/products/create-product.json)
+  }
+}
+
+http:put {
+  req {
+    url: /products/:id
+  }
+  res {
+    status: 200
+    body: file(./stubs/products/update-product.json)
+  }
+}
+
+http:delete {
+  req {
+    url: /products/:id
+  }
+  res {
+    status: 200
+    body: file(./stubs/products/delete-product.json)
+  }
+}
+
+http:post {
+  req {
+    url: /carts/:id
+  }
+  res {
+    status: 200
+    body: file(./stubs/cart/add-cart-item.json)
+  }
+}
+
+http:put {
+  req {
+    url: /carts/:id/items/:itemId
+  }
+  res {
+    status: 200
+    body: file(./stubs/cart/update-cart-item.json)
+  }
+}
+
+http:delete {
+  req {
+    url: /carts/:id/items/:itemId
+  }
+  res {
+    status: 200
+    body: file(./stubs/cart/remove-cart-item.json)
+  }
+}
+
+http:post {
+  req {
+    url: /orders
+  }
+  res {
+    status: 201
+    body: file(./stubs/orders/place-order.json)
+  }
+}
+
+http:delete {
+  req {
+    url: /orders/:id
+  }
+  res {
+    status: 200
+    body: file(./stubs/orders/cancel-order.json)
+  }
+}

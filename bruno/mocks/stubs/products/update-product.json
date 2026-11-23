@@ -1,0 +1,32 @@
+{
+  "id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+  "name": "Updated Product Name",
+  "description": "Updated product description",
+  "price": 19.99,
+  "is_location_offer": 0,
+  "is_rental": 0,
+  "in_stock": 5,
+  "co2_rating": "B",
+  "is_eco_friendly": false,
+  "brand": {
+    "id": "01HHJC7RERZJY4BEYQ87PC2Q1Y",
+    "name": "ForgeFlex Tools",
+    "slug": "forgeflex-tools"
+  },
+  "category": {
+    "id": "01HHJC7RERZJY4BEYQ87PC2Q2Z",
+    "parent_id": "01HHJC7RERZJY4BEYQ87PC2Q3A",
+    "name": "Pliers",
+    "slug": "pliers",
+    "sub_categories": []
+  },
+  "product_image": {
+    "by_name": "Helinton Fantin",
+    "by_url": "https://unsplash.com/@fantin",
+    "source_name": "Unsplash",
+    "source_url": "https://unsplash.com",
+    "file_name": "pliers01.jpeg",
+    "title": "Updated Product",
+    "id": "01HHJC7RERZJY4BEYQ87PC2Q4B"
+  }
+}

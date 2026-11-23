@@ -1,0 +1,4 @@
+name: Mock environment
+variables:
+  - name: baseUrl
+    value: http://localhost:3001

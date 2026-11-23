@@ -1,0 +1,84 @@
+info:
+  name: Create a new cart
+  type: http
+  seq: 1
+  tags:
+    - Cart
+
+http:
+  method: POST
+  url: "{{baseUrl}}/carts"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 201 Response
+    description: Create cartId
+    request:
+      url: "{{baseUrl}}/carts"
+      method: POST
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "1234"
+          }
+  - name: 404 Response
+    description: Returns when the resource is not found
+    request:
+      url: "{{baseUrl}}/carts"
+      method: POST
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Requested item not found"
+          }
+  - name: 405 Response
+    description: Returns when the method is not allowed for the requested route
+    request:
+      url: "{{baseUrl}}/carts"
+      method: POST
+    response:
+      status: 405
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method is not allowed for the requested route"
+          }
+  - name: 422 Response
+    description: Returns when the server was not able to process the content
+    request:
+      url: "{{baseUrl}}/carts"
+      method: POST
+    response:
+      status: 422
+      statusText: Unprocessable Entity
+      body:
+        type: text
+        data: ""
+
+docs: Create a new cart

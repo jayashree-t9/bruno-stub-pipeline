@@ -1,0 +1,236 @@
+info:
+  name: Retrieve all products
+  type: http
+  seq: 1
+  tags:
+    - Product
+
+http:
+  method: GET
+  url: "{{baseUrl}}/products"
+  params:
+    - name: by_brand
+      value: ""
+      type: query
+      description: Id of brand
+      disabled: true
+    - name: by_category
+      value: ""
+      type: query
+      description: Id of category
+      disabled: true
+    - name: is_rental
+      value: ""
+      type: query
+      description: Indication if we like to retrieve rentals products
+      disabled: true
+    - name: between
+      value: ""
+      type: query
+      description: "Can be used to define a price range, like: price,10,30"
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: "Can be used to sort based on specific column value, like: name,asc OR name,desc OR price,asc OR price,desc"
+      disabled: true
+    - name: page
+      value: ""
+      type: query
+      description: pagenumber
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Successful operation
+    request:
+      url: "{{baseUrl}}/products"
+      method: GET
+      params:
+        - name: by_brand
+          value: ""
+          type: query
+          description: Id of brand
+          disabled: true
+        - name: by_category
+          value: ""
+          type: query
+          description: Id of category
+          disabled: true
+        - name: is_rental
+          value: ""
+          type: query
+          description: Indication if we like to retrieve rentals products
+          disabled: true
+        - name: between
+          value: ""
+          type: query
+          description: "Can be used to define a price range, like: price,10,30"
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: "Can be used to sort based on specific column value, like: name,asc OR name,desc OR price,asc OR price,desc"
+          disabled: true
+        - name: page
+          value: ""
+          type: query
+          description: pagenumber
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "current_page": 1,
+            "data": [
+              {
+                "id": "01JFG8Q5XKZJY4BEYQ87PC2Q1Y",
+                "name": "new brand",
+                "description": "Lorum ipsum",
+                "price": 9.99,
+                "is_location_offer": 1,
+                "is_rental": 0,
+                "in_stock": 0,
+                "co2_rating": "A",
+                "is_eco_friendly": true,
+                "brand": {
+                  "id": "",
+                  "name": "new brand",
+                  "slug": "new-brand"
+                },
+                "category": {
+                  "id": "",
+                  "parent_id": "",
+                  "name": "new category",
+                  "slug": "new-category",
+                  "sub_categories": []
+                },
+                "product_image": {
+                  "by_name": "",
+                  "by_url": "",
+                  "source_name": "",
+                  "source_url": "",
+                  "file_name": "",
+                  "title": "",
+                  "id": ""
+                }
+              }
+            ],
+            "from": 1,
+            "last_page": 1,
+            "per_page": 1,
+            "to": 1,
+            "total": 1
+          }
+  - name: 404 Response
+    description: Returns when the resource is not found
+    request:
+      url: "{{baseUrl}}/products"
+      method: GET
+      params:
+        - name: by_brand
+          value: ""
+          type: query
+          description: Id of brand
+          disabled: true
+        - name: by_category
+          value: ""
+          type: query
+          description: Id of category
+          disabled: true
+        - name: is_rental
+          value: ""
+          type: query
+          description: Indication if we like to retrieve rentals products
+          disabled: true
+        - name: between
+          value: ""
+          type: query
+          description: "Can be used to define a price range, like: price,10,30"
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: "Can be used to sort based on specific column value, like: name,asc OR name,desc OR price,asc OR price,desc"
+          disabled: true
+        - name: page
+          value: ""
+          type: query
+          description: pagenumber
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Requested item not found"
+          }
+  - name: 405 Response
+    description: Returns when the method is not allowed for the requested route
+    request:
+      url: "{{baseUrl}}/products"
+      method: GET
+      params:
+        - name: by_brand
+          value: ""
+          type: query
+          description: Id of brand
+          disabled: true
+        - name: by_category
+          value: ""
+          type: query
+          description: Id of category
+          disabled: true
+        - name: is_rental
+          value: ""
+          type: query
+          description: Indication if we like to retrieve rentals products
+          disabled: true
+        - name: between
+          value: ""
+          type: query
+          description: "Can be used to define a price range, like: price,10,30"
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: "Can be used to sort based on specific column value, like: name,asc OR name,desc OR price,asc OR price,desc"
+          disabled: true
+        - name: page
+          value: ""
+          type: query
+          description: pagenumber
+          disabled: true
+    response:
+      status: 405
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method is not allowed for the requested route"
+          }
+
+docs: Retrieve all products

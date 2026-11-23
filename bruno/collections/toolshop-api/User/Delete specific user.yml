@@ -1,0 +1,143 @@
+info:
+  name: Delete specific user
+  type: http
+  seq: 11
+  tags:
+    - User
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/users/:userId"
+  params:
+    - name: userId
+      value: ""
+      type: path
+      description: The userId parameter in path
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 204 Response
+    description: Successful operation
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: DELETE
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 401 Response
+    description: Returns when user is not authenticated
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: DELETE
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized"
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: DELETE
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Returns when the resource is not found
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: DELETE
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Requested item not found"
+          }
+  - name: 405 Response
+    description: Returns when the method is not allowed for the requested route
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: DELETE
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+    response:
+      status: 405
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method is not allowed for the requested route"
+          }
+  - name: 409 Response
+    description: Returns when the entity is used elsewhere
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: DELETE
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+    response:
+      status: 409
+      statusText: Conflict
+      body:
+        type: text
+        data: ""
+
+docs: Admin role is required to delete a specific user

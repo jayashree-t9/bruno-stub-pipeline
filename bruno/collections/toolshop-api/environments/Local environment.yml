@@ -1,0 +1,4 @@
+name: Local environment
+variables:
+  - name: baseUrl
+    value: http://localhost:8091

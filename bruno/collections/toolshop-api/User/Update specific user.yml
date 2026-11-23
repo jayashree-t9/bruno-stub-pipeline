@@ -1,0 +1,279 @@
+info:
+  name: Update specific user
+  type: http
+  seq: 10
+  tags:
+    - User
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/users/:userId"
+  params:
+    - name: userId
+      value: ""
+      type: path
+      description: The userId parameter in path
+  body:
+    type: json
+    data: |-
+      {
+        "first_name": "John",
+        "last_name": "Doe",
+        "address": {
+          "street": "Street 1",
+          "house_number": "12",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "postal_code": "1234AA"
+        },
+        "phone": "0987654321",
+        "dob": "1970-01-01",
+        "password": "SuperSecure@123",
+        "email": "john@doe.example"
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Result of the update
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: PUT
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+      body:
+        type: json
+        data: |-
+          {
+            "first_name": "John",
+            "last_name": "Doe",
+            "address": {
+              "street": "Street 1",
+              "house_number": "12",
+              "city": "City",
+              "state": "State",
+              "country": "Country",
+              "postal_code": "1234AA"
+            },
+            "phone": "0987654321",
+            "dob": "1970-01-01",
+            "password": "SuperSecure@123",
+            "email": "john@doe.example"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "success": true
+          }
+  - name: 401 Response
+    description: Returns when user is not authenticated
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: PUT
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+      body:
+        type: json
+        data: |-
+          {
+            "first_name": "John",
+            "last_name": "Doe",
+            "address": {
+              "street": "Street 1",
+              "house_number": "12",
+              "city": "City",
+              "state": "State",
+              "country": "Country",
+              "postal_code": "1234AA"
+            },
+            "phone": "0987654321",
+            "dob": "1970-01-01",
+            "password": "SuperSecure@123",
+            "email": "john@doe.example"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized"
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: PUT
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+      body:
+        type: json
+        data: |-
+          {
+            "first_name": "John",
+            "last_name": "Doe",
+            "address": {
+              "street": "Street 1",
+              "house_number": "12",
+              "city": "City",
+              "state": "State",
+              "country": "Country",
+              "postal_code": "1234AA"
+            },
+            "phone": "0987654321",
+            "dob": "1970-01-01",
+            "password": "SuperSecure@123",
+            "email": "john@doe.example"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 405 Response
+    description: Returns when the method is not allowed for the requested route
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: PUT
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+      body:
+        type: json
+        data: |-
+          {
+            "first_name": "John",
+            "last_name": "Doe",
+            "address": {
+              "street": "Street 1",
+              "house_number": "12",
+              "city": "City",
+              "state": "State",
+              "country": "Country",
+              "postal_code": "1234AA"
+            },
+            "phone": "0987654321",
+            "dob": "1970-01-01",
+            "password": "SuperSecure@123",
+            "email": "john@doe.example"
+          }
+    response:
+      status: 405
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method is not allowed for the requested route"
+          }
+  - name: 409 Response
+    description: The resource conflicts with an existing one (e.g. unique slug already taken). Body is either a field-level MessageBag (when caught by validation) or a single message (when caught by the Handler from a race / FormRequest bypass).
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: PUT
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+      body:
+        type: json
+        data: |-
+          {
+            "first_name": "John",
+            "last_name": "Doe",
+            "address": {
+              "street": "Street 1",
+              "house_number": "12",
+              "city": "City",
+              "state": "State",
+              "country": "Country",
+              "postal_code": "1234AA"
+            },
+            "phone": "0987654321",
+            "dob": "1970-01-01",
+            "password": "SuperSecure@123",
+            "email": "john@doe.example"
+          }
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ""
+  - name: 422 Response
+    description: Returns when the server was not able to process the content
+    request:
+      url: "{{baseUrl}}/users/:userId"
+      method: PUT
+      params:
+        - name: userId
+          value: ""
+          type: path
+          description: The userId parameter in path
+      body:
+        type: json
+        data: |-
+          {
+            "first_name": "John",
+            "last_name": "Doe",
+            "address": {
+              "street": "Street 1",
+              "house_number": "12",
+              "city": "City",
+              "state": "State",
+              "country": "Country",
+              "postal_code": "1234AA"
+            },
+            "phone": "0987654321",
+            "dob": "1970-01-01",
+            "password": "SuperSecure@123",
+            "email": "john@doe.example"
+          }
+    response:
+      status: 422
+      statusText: Unprocessable Entity
+      body:
+        type: text
+        data: ""
+
+docs: Update specific user

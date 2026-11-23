@@ -1,0 +1,95 @@
+info:
+  name: Retrieve specific brand
+  type: http
+  seq: 3
+  tags:
+    - Brand
+
+http:
+  method: GET
+  url: "{{baseUrl}}/brands/:brandId"
+  params:
+    - name: brandId
+      value: "1"
+      type: path
+      description: The brandId parameter in path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Successful operation
+    request:
+      url: "{{baseUrl}}/brands/:brandId"
+      method: GET
+      params:
+        - name: brandId
+          value: "1"
+          type: path
+          description: The brandId parameter in path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "",
+            "name": "new brand",
+            "slug": "new-brand"
+          }
+  - name: 404 Response
+    description: Returns when the resource is not found
+    request:
+      url: "{{baseUrl}}/brands/:brandId"
+      method: GET
+      params:
+        - name: brandId
+          value: "1"
+          type: path
+          description: The brandId parameter in path
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Requested item not found"
+          }
+  - name: 405 Response
+    description: Returns when the method is not allowed for the requested route
+    request:
+      url: "{{baseUrl}}/brands/:brandId"
+      method: GET
+      params:
+        - name: brandId
+          value: "1"
+          type: path
+          description: The brandId parameter in path
+    response:
+      status: 405
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method is not allowed for the requested route"
+          }
+
+docs: Retrieve specific brand

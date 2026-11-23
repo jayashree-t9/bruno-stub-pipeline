@@ -1,0 +1,53 @@
+info:
+  name: Check payment
+  type: http
+  seq: 1
+  tags:
+    - Payment
+
+http:
+  method: POST
+  url: "{{baseUrl}}/payment/check"
+  body:
+    type: json
+    data: |-
+      {
+        "payment_method": "bank-transfer",
+        "payment_details": {}
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Successful operation
+    request:
+      url: "{{baseUrl}}/payment/check"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "payment_method": "bank-transfer",
+            "payment_details": {}
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Success status"
+          }
+
+docs: Check payment

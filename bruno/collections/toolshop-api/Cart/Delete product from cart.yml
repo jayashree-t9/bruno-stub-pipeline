@@ -1,0 +1,169 @@
+info:
+  name: Delete product from cart
+  type: http
+  seq: 6
+  tags:
+    - Cart
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/carts/:cartId/product/:productId"
+  params:
+    - name: cartId
+      value: "1"
+      type: path
+      description: The cartId parameter in path
+    - name: productId
+      value: "1"
+      type: path
+      description: The cartId parameter in path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 204 Response
+    description: Successful operation
+    request:
+      url: "{{baseUrl}}/carts/:cartId/product/:productId"
+      method: DELETE
+      params:
+        - name: cartId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+        - name: productId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 401 Response
+    description: Returns when user is not authenticated
+    request:
+      url: "{{baseUrl}}/carts/:cartId/product/:productId"
+      method: DELETE
+      params:
+        - name: cartId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+        - name: productId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized"
+          }
+  - name: 404 Response
+    description: Returns when the resource is not found
+    request:
+      url: "{{baseUrl}}/carts/:cartId/product/:productId"
+      method: DELETE
+      params:
+        - name: cartId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+        - name: productId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Resource not found"
+          }
+  - name: 405 Response
+    description: Returns when the method is not allowed for the requested route
+    request:
+      url: "{{baseUrl}}/carts/:cartId/product/:productId"
+      method: DELETE
+      params:
+        - name: cartId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+        - name: productId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+    response:
+      status: 405
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method is not allowed for the requested route"
+          }
+  - name: 409 Response
+    description: Returns when the entity is used elsewhere
+    request:
+      url: "{{baseUrl}}/carts/:cartId/product/:productId"
+      method: DELETE
+      params:
+        - name: cartId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+        - name: productId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+    response:
+      status: 409
+      statusText: Conflict
+      body:
+        type: text
+        data: ""
+  - name: 422 Response
+    description: Returns when the server was not able to process the content
+    request:
+      url: "{{baseUrl}}/carts/:cartId/product/:productId"
+      method: DELETE
+      params:
+        - name: cartId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+        - name: productId
+          value: "1"
+          type: path
+          description: The cartId parameter in path
+    response:
+      status: 422
+      statusText: Unprocessable Entity
+      body:
+        type: text
+        data: ""
+
+docs: Delete a product from Cart

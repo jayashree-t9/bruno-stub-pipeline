@@ -1,0 +1,144 @@
+info:
+  name: Add item to cart
+  type: http
+  seq: 2
+  tags:
+    - Cart
+
+http:
+  method: POST
+  url: "{{baseUrl}}/carts/:id"
+  params:
+    - name: id
+      value: ""
+      type: path
+      description: Cart ID
+  body:
+    type: json
+    data: |-
+      {
+        "product_id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+        "quantity": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Item added
+    request:
+      url: "{{baseUrl}}/carts/:id"
+      method: POST
+      params:
+        - name: id
+          value: ""
+          type: path
+          description: Cart ID
+      body:
+        type: json
+        data: |-
+          {
+            "product_id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+            "quantity": 1
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "result": "item added or updated"
+          }
+  - name: 404 Response
+    description: Returns when the resource is not found
+    request:
+      url: "{{baseUrl}}/carts/:id"
+      method: POST
+      params:
+        - name: id
+          value: ""
+          type: path
+          description: Cart ID
+      body:
+        type: json
+        data: |-
+          {
+            "product_id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+            "quantity": 1
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Requested item not found"
+          }
+  - name: 405 Response
+    description: Returns when the method is not allowed for the requested route
+    request:
+      url: "{{baseUrl}}/carts/:id"
+      method: POST
+      params:
+        - name: id
+          value: ""
+          type: path
+          description: Cart ID
+      body:
+        type: json
+        data: |-
+          {
+            "product_id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+            "quantity": 1
+          }
+    response:
+      status: 405
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method is not allowed for the requested route"
+          }
+  - name: 422 Response
+    description: Returns when the server was not able to process the content
+    request:
+      url: "{{baseUrl}}/carts/:id"
+      method: POST
+      params:
+        - name: id
+          value: ""
+          type: path
+          description: Cart ID
+      body:
+        type: json
+        data: |-
+          {
+            "product_id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+            "quantity": 1
+          }
+    response:
+      status: 422
+      statusText: Unprocessable Entity
+      body:
+        type: text
+        data: ""
+
+docs: Add item to cart

@@ -1,0 +1,71 @@
+info:
+  name: Retrieve a refreshed token
+  type: http
+  seq: 8
+  tags:
+    - User
+
+http:
+  method: GET
+  url: "{{baseUrl}}/users/refresh"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: A token
+    request:
+      url: "{{baseUrl}}/users/refresh"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "access_token": "super-secret-token",
+            "token_type": "Bearer",
+            "expires_in": 120
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/users/refresh"
+      method: GET
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 401 Response
+    description: Returns when user is not authenticated
+    request:
+      url: "{{baseUrl}}/users/refresh"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized"
+          }
+
+docs: Retrieve a refreshed token

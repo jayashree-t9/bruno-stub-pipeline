@@ -1,0 +1,110 @@
+info:
+  name: Lookup address details by postcode
+  type: http
+  seq: 1
+  tags:
+    - Postcode
+
+http:
+  method: GET
+  url: "{{baseUrl}}/postcode-lookup"
+  params:
+    - name: country
+      value: ""
+      type: query
+    - name: postcode
+      value: ""
+      type: query
+    - name: house_number
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Address details
+    request:
+      url: "{{baseUrl}}/postcode-lookup"
+      method: GET
+      params:
+        - name: country
+          value: ""
+          type: query
+        - name: postcode
+          value: ""
+          type: query
+        - name: house_number
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "street": "",
+            "house_number": "",
+            "city": "",
+            "state": "",
+            "country": "",
+            "postcode": ""
+          }
+  - name: 422 Response
+    description: Returns when the server was not able to process the content
+    request:
+      url: "{{baseUrl}}/postcode-lookup"
+      method: GET
+      params:
+        - name: country
+          value: ""
+          type: query
+        - name: postcode
+          value: ""
+          type: query
+        - name: house_number
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 422
+      statusText: Unprocessable Entity
+      body:
+        type: text
+        data: ""
+  - name: 502 Response
+    description: Upstream lookup failure
+    request:
+      url: "{{baseUrl}}/postcode-lookup"
+      method: GET
+      params:
+        - name: country
+          value: ""
+          type: query
+        - name: postcode
+          value: ""
+          type: query
+        - name: house_number
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 502
+      statusText: Bad Gateway
+      body:
+        type: text
+        data: ""
+
+docs: "Returns street, city and state for a given country/postcode/house number. The underlying source is configurable: a local faker driver (default) or an external HTTP service (e.g. a WireMock stub) when POSTCODE_LOOKUP_DRIVER=http."

@@ -1,0 +1,15 @@
+{
+  "id": "01HHJC7RERZ0M3VDGS6X9HM99Z",
+  "order_number": "ORD-2024-001",
+  "status": "pending",
+  "total_amount": 14.15,
+  "created_at": "2024-11-19T06:30:00Z",
+  "items": [
+    {
+      "product_id": "01HHJC7RERZ0M3VDGS6X9HM33A",
+      "product_name": "Combination Pliers",
+      "quantity": 1,
+      "price": 14.15
+    }
+  ]
+}

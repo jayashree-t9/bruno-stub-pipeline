@@ -1,0 +1,121 @@
+info:
+  name: Retrieve all users
+  type: http
+  seq: 1
+  tags:
+    - User
+
+http:
+  method: GET
+  url: "{{baseUrl}}/users"
+  params:
+    - name: page
+      value: ""
+      type: query
+      description: pagenumber
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Successful operation
+    request:
+      url: "{{baseUrl}}/users"
+      method: GET
+      params:
+        - name: page
+          value: ""
+          type: query
+          description: pagenumber
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "current_page": 1,
+            "data": [
+              {
+                "first_name": "John",
+                "last_name": "Doe",
+                "address": {
+                  "street": "Street 1",
+                  "house_number": "12",
+                  "city": "City",
+                  "state": "State",
+                  "country": "Country",
+                  "postal_code": "1234AA"
+                },
+                "phone": "0987654321",
+                "dob": "1970-01-01",
+                "email": "john@doe.example",
+                "id": "",
+                "provider": "",
+                "totp_enabled": false,
+                "enabled": false,
+                "failed_login_attempts": "",
+                "created_at": "2022-08-01 08:24:56"
+              }
+            ],
+            "from": 1,
+            "last_page": 1,
+            "per_page": 1,
+            "to": 1,
+            "total": 1
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/users"
+      method: GET
+      params:
+        - name: page
+          value: ""
+          type: query
+          description: pagenumber
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: ""
+  - name: 401 Response
+    description: Returns when user is not authenticated
+    request:
+      url: "{{baseUrl}}/users"
+      method: GET
+      params:
+        - name: page
+          value: ""
+          type: query
+          description: pagenumber
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized"
+          }
+
+docs: Retrieve all users

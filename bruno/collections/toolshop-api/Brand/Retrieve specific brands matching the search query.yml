@@ -1,0 +1,97 @@
+info:
+  name: Retrieve specific brands matching the search query
+  type: http
+  seq: 7
+  tags:
+    - Brand
+
+http:
+  method: GET
+  url: "{{baseUrl}}/brands/search"
+  params:
+    - name: q
+      value: ""
+      type: query
+      description: A query phrase
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: Successful operation
+    request:
+      url: "{{baseUrl}}/brands/search"
+      method: GET
+      params:
+        - name: q
+          value: ""
+          type: query
+          description: A query phrase
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "id": "",
+              "name": "new brand",
+              "slug": "new-brand"
+            }
+          ]
+  - name: 404 Response
+    description: Returns when the resource is not found
+    request:
+      url: "{{baseUrl}}/brands/search"
+      method: GET
+      params:
+        - name: q
+          value: ""
+          type: query
+          description: A query phrase
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Resource not found"
+          }
+  - name: 405 Response
+    description: Returns when the method is not allowed for the requested route
+    request:
+      url: "{{baseUrl}}/brands/search"
+      method: GET
+      params:
+        - name: q
+          value: ""
+          type: query
+          description: A query phrase
+    response:
+      status: 405
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method is not allowed for the requested route"
+          }
+
+docs: Search is performed on the `name` column
