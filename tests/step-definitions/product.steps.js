@@ -3,10 +3,28 @@ const { expect } = require('chai');
 const ProductPage = require('../pages/ProductPage');
 
 Given('I navigate to the homepage', { timeout: 60000 }, async function() {
+  // Listen for the products API response
+  const productsPromise = this.page.waitForResponse(
+    response => response.url().includes('/products') && response.status() === 200,
+    { timeout: 30000 }
+  );
+  
   await this.page.goto('https://practicesoftwaretesting.com', { waitUntil: 'domcontentloaded', timeout: 60000 });
-  // Wait for product grid to load
-  await this.page.waitForSelector('[data-test="product-name"], .card, [class*="product"]', { timeout: 30000 }).catch(() => {});
-  await this.page.waitForTimeout(5000);
+  
+  // Wait for products API to complete
+  await productsPromise;
+  
+  // Wait for Angular/React to render
+  await this.page.waitForTimeout(8000);
+  
+  // Debug: Check what's on the page
+  const pageContent = await this.page.content();
+  console.log('Page loaded, checking for products...');
+  
+  // Wait for any product cards to appear
+  await this.page.waitForSelector('[data-test="product-name"], .card, [class*="product"], h5, .product-title', { timeout: 10000 }).catch(() => {
+    console.log('No product elements found on page');
+  });
 });
 
 When('I click on {string} product', { timeout: 90000 }, async function(productName) {
