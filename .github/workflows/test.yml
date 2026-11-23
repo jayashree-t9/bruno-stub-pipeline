@@ -25,7 +25,9 @@ jobs:
         run: |
           npx playwright install chromium
           npx playwright install-deps chromium
-          mkdir -p reports
+          
+      - name: Create reports directory
+        run: mkdir -p reports
           
       - name: Run tests
         run: npm run test:mock
@@ -39,10 +41,11 @@ jobs:
       - name: Generate report
         if: always()
         run: |
+          ls -la reports/ || echo "Reports directory not found"
           if [ -f reports/cucumber-report.json ]; then
             npm run report
           else
-            echo "No test results to generate report"
+            echo "No cucumber-report.json found - tests may have failed before completion"
           fi
         
       - name: Upload test report
