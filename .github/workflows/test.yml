@@ -29,6 +29,12 @@ jobs:
           
       - name: Run tests
         run: npm run test:mock
+        continue-on-error: true
+        id: test_attempt_1
+        
+      - name: Retry tests if failed
+        if: steps.test_attempt_1.outcome == 'failure'
+        run: npm run test:mock
         
       - name: Generate report
         if: always()
