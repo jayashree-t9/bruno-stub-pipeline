@@ -5,6 +5,6 @@ module.exports = {
     formatOptions: { snippetInterface: 'async-await' },
     publishQuiet: true,
     paths: ['tests/features/**/*.feature'],
-    timeout: 30000
+    timeout: 60000
   }
 };

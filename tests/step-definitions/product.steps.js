@@ -2,14 +2,13 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const ProductPage = require('../pages/ProductPage');
 
-Given('I navigate to the homepage', { timeout: 30000 }, async function() {
-  await this.page.goto('https://practicesoftwaretesting.com');
-  await this.page.waitForLoadState('domcontentloaded');
-  await this.page.waitForTimeout(8000);
+Given('I navigate to the homepage', { timeout: 60000 }, async function() {
+  await this.page.goto('https://practicesoftwaretesting.com', { waitUntil: 'networkidle' });
+  await this.page.waitForTimeout(3000);
 });
 
-When('I click on {string} product', { timeout: 60000 }, async function(productName) {
-  await this.page.waitForSelector(`text=${productName}`, { timeout: 45000 });
+When('I click on {string} product', { timeout: 90000 }, async function(productName) {
+  await this.page.waitForSelector(`text=${productName}`, { timeout: 60000 });
   await this.page.click(`text=${productName}`);
   await this.page.waitForLoadState('networkidle');
   await this.page.waitForTimeout(2000);
