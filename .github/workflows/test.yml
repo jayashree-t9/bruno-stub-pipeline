@@ -41,6 +41,14 @@ jobs:
           path: reports/
           if-no-files-found: ignore
           
+      - name: Upload debug screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-screenshots
+          path: '*.png'
+          if-no-files-found: ignore
+          
       - name: Upload screenshots
         if: failure()
         uses: actions/upload-artifact@v4

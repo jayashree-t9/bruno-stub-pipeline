@@ -12,14 +12,17 @@ Given('I navigate to the homepage', { timeout: 60000 }, async function() {
   await this.page.goto('https://practicesoftwaretesting.com', { waitUntil: 'domcontentloaded', timeout: 60000 });
   
   // Wait for products API to complete
-  await productsPromise;
+  const response = await productsPromise;
+  const responseBody = await response.json();
+  console.log('API Response:', JSON.stringify(responseBody).substring(0, 200));
   
   // Wait for Angular/React to render
-  await this.page.waitForTimeout(8000);
+  await this.page.waitForTimeout(10000);
   
-  // Debug: Check what's on the page
-  const pageContent = await this.page.content();
-  console.log('Page loaded, checking for products...');
+  // Debug: Take screenshot and check page content
+  await this.page.screenshot({ path: 'debug-homepage.png', fullPage: true });
+  const bodyText = await this.page.locator('body').textContent();
+  console.log('Page text includes Combination:', bodyText.includes('Combination'));
   
   // Wait for any product cards to appear
   await this.page.waitForSelector('[data-test="product-name"], .card, [class*="product"], h5, .product-title', { timeout: 10000 }).catch(() => {
