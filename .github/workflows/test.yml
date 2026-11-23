@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           
@@ -39,6 +39,7 @@ jobs:
         with:
           name: test-report
           path: reports/
+          if-no-files-found: ignore
           
       - name: Upload screenshots
         if: failure()
@@ -46,3 +47,4 @@ jobs:
         with:
           name: screenshots
           path: screenshots/
+          if-no-files-found: ignore
