@@ -4,12 +4,36 @@ const ProductPage = require('../pages/ProductPage');
 
 Given('I navigate to the homepage', { timeout: 60000 }, async function() {
   await this.page.goto('https://practicesoftwaretesting.com', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  // Wait for product grid to load
+  await this.page.waitForSelector('[data-test="product-name"], .card, [class*="product"]', { timeout: 30000 }).catch(() => {});
   await this.page.waitForTimeout(5000);
 });
 
 When('I click on {string} product', { timeout: 90000 }, async function(productName) {
-  await this.page.waitForSelector(`text=${productName}`, { timeout: 60000 });
-  await this.page.click(`text=${productName}`);
+  // Try multiple selectors
+  const selectors = [
+    `text=${productName}`,
+    `[data-test="product-name"]:has-text("${productName}")`,
+    `.card:has-text("${productName}")`,
+    `a:has-text("${productName}")`
+  ];
+  
+  let clicked = false;
+  for (const selector of selectors) {
+    try {
+      await this.page.waitForSelector(selector, { timeout: 15000 });
+      await this.page.click(selector);
+      clicked = true;
+      break;
+    } catch (e) {
+      console.log(`Selector failed: ${selector}`);
+    }
+  }
+  
+  if (!clicked) {
+    throw new Error(`Could not find product: ${productName}`);
+  }
+  
   await this.page.waitForLoadState('networkidle');
   await this.page.waitForTimeout(2000);
 });
