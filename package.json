@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "mock:start": "node mock-server.js",
-    "test": "cucumber-js tests/features/**/*.feature --require tests/step-definitions --require tests/support",
+    "test": "cucumber-js",
     "test:mock": "node mock-server.js & MOCK_PID=$! && sleep 2 && npm test; TEST_EXIT=$?; kill $MOCK_PID 2>/dev/null; exit $TEST_EXIT",
     "report": "node generate-report.js"
   },
