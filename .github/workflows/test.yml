@@ -38,7 +38,12 @@ jobs:
         
       - name: Generate report
         if: always()
-        run: npm run report
+        run: |
+          if [ -f reports/cucumber-report.json ]; then
+            npm run report
+          else
+            echo "No test results to generate report"
+          fi
         
       - name: Upload test report
         if: always()
