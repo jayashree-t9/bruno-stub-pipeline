@@ -8,7 +8,9 @@
       "price": 14.15,
       "is_location_offer": false,
       "is_rental": false,
+      "co2_rating": "D",
       "in_stock": true,
+      "is_eco_friendly": false,
       "stock": 50,
       "product_image_id": "01HHJC7RERZJY4BEYQ87PC2Q4B",
       "product_image": {
