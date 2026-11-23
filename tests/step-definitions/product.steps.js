@@ -3,8 +3,8 @@ const { expect } = require('chai');
 const ProductPage = require('../pages/ProductPage');
 
 Given('I navigate to the homepage', { timeout: 60000 }, async function() {
-  await this.page.goto('https://practicesoftwaretesting.com', { waitUntil: 'networkidle' });
-  await this.page.waitForTimeout(3000);
+  await this.page.goto('https://practicesoftwaretesting.com', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await this.page.waitForTimeout(5000);
 });
 
 When('I click on {string} product', { timeout: 90000 }, async function(productName) {
