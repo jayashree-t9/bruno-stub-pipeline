@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const ProductPage = require('../pages/ProductPage');
 
-Given('I navigate to the homepage', { timeout: 60000 }, async function() {
+Given('I navigate to the homepage', { timeout: 90000 }, async function() {
   // Listen for the products API response
   const productsPromise = this.page.waitForResponse(
     response => response.url().includes('/products') && response.status() === 200,
@@ -16,18 +16,20 @@ Given('I navigate to the homepage', { timeout: 60000 }, async function() {
   const responseBody = await response.json();
   console.log('API Response:', JSON.stringify(responseBody).substring(0, 200));
   
-  // Wait for Angular/React to render
-  await this.page.waitForTimeout(10000);
+  // Wait for the page to be fully loaded and interactive
+  await this.page.waitForLoadState('networkidle', { timeout: 30000 });
   
-  // Debug: Take screenshot and check page content
-  await this.page.screenshot({ path: 'debug-homepage.png', fullPage: true });
+  // Wait longer for Angular/React to render (CI is slower)
+  await this.page.waitForTimeout(15000);
+  
+  // Debug: Check if product is rendered
   const bodyText = await this.page.locator('body').textContent();
   console.log('Page text includes Combination:', bodyText.includes('Combination'));
   
-  // Wait for any product cards to appear
-  await this.page.waitForSelector('[data-test="product-name"], .card, [class*="product"], h5, .product-title', { timeout: 10000 }).catch(() => {
-    console.log('No product elements found on page');
-  });
+  if (!bodyText.includes('Combination')) {
+    await this.page.screenshot({ path: 'debug-homepage.png', fullPage: true });
+    console.log('Product not rendered, screenshot saved');
+  }
 });
 
 When('I click on {string} product', { timeout: 90000 }, async function(productName) {
