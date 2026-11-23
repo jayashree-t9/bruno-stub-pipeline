@@ -25,6 +25,7 @@ jobs:
         run: |
           npx playwright install chromium
           npx playwright install-deps chromium
+          mkdir -p reports
           
       - name: Run tests
         run: npm run test:mock
